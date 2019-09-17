@@ -4,8 +4,8 @@ import unittest
 class ModelTest(unittest.TestCase):
 
     def test(self):
-        from DrawerKieran import Drawer
-        from ParserDang import Parser
+        from drawer_kieran import Drawer
+        from parser_dang import Parser
         to_draw = open('test.txt', "r+").read()
         parser = Parser(Drawer())
         s = parser.parse(to_draw)
