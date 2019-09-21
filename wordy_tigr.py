@@ -36,6 +36,7 @@ class Parser(AbstractParser):
         self.source = raw_source
         for line in self.source:
             self.command = line[0]
+            # noinspection PyBroadException
             try:
                 self.data = int(line[2])
             except:

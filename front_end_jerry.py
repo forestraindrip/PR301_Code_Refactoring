@@ -78,8 +78,7 @@ class GuiInterface:
         self.master.text = Text(self.master, height=27, width=32)
         self.master.text.pack(side="left", fill="both", expand="yes")
 
-    def draw(self):
-        # print(self.text.get(1.0, "end-1c"))
+    def draw(self):  # TODO: Inappropriate Intimacy
         self.source_reader.parser.parse(self.master.text.get(1.0, "end-1c"))
 
     def restart_program(self):  # TODO: Duplicate code

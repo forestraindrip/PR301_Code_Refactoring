@@ -87,7 +87,7 @@ class TkinterInterface:
         python = sys.executable
         os.execl(python, python, *sys.argv)
 
-    def draw(self):
+    def draw(self):         # TODO: Inappropriate Intimacy
         self.SourceReader.parser.parse(self.toDraw)
         self.window.toDrawLabel.config(text=self.toDraw)
 

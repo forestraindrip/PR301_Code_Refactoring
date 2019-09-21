@@ -2,7 +2,7 @@
 from tigr import AbstractSourceReader
 
 
-class MainTIGr(AbstractSourceReader):  # TODO: this class should be in the front end
+class MainTIGr(AbstractSourceReader):  # TODO:
     def go(self):
         global interface  # TODO: Global
         if config[2] == "FrontEndKieran":
