@@ -104,14 +104,10 @@ class GuiInterface:
         self.master.text.pack(side="left", fill="both", expand="yes")
 
     def draw(self):  # TODO: Inappropriate Intimacy
-        # self.source_reader.go(self.master.text.get(1.0, "end-1c"))
         self.source_reader = SourceReader(self.parser, self.importedFile)
         self.source_reader.go()
 
     def restart_program(self):  # TODO: Duplicate code
-        """Restarts the current program.
-        Note: this function does not return. Any cleanup action (like
-        saving data) must be done before calling this function."""
         file = open("config.txt", "w")
         file.write(
             self.master.comboDrawer.get()
@@ -135,7 +131,6 @@ class GuiInterface:
         )
         if self.importedFile is not "":
             self.insert_text(open(self.importedFile, "r+").read())
-
 
     def start(self):
         self.master.mainloop()
