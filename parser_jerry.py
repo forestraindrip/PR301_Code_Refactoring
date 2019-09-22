@@ -8,14 +8,14 @@ import doctest
 class ParserJerry(AbstractParser):
     def parse(self, raw_source):
         """
-        >>> d = DrawerKieran()
+        >>> import tkinter
+        >>> canvas = tkinter.Canvas(tkinter.Tk(), width=500, height=500)
+        >>> from drawer_kieran import DrawerKieran
+        >>> d = DrawerKieran(canvas)
         >>> d.can_draw = True
         >>> p = ParserJerry(d)
-        >>> p.parse('X 100')
+        >>> p.parse(["X 100"])
         GOTO X=100
-        """
-        """hard coded parsing like this is a Bad Thing!
-            It is inflexible and has no error checking
         """
         self.source = raw_source
         if raw_source is not "":
