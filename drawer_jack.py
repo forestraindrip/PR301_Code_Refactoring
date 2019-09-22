@@ -3,23 +3,16 @@ import my_enums
 from tigr import AbstractDrawer
 
 
-class Drawer(AbstractDrawer):
-    config = open("config.txt", "r+").read().splitlines()
-    if config[2] == "FrontEndKieran":  # TODO: Duplicate code
-        from front_end_kieran import TkinterInterface
-        this_canvas = TkinterInterface.canvas
-    elif config[2] == "FrontEndJerry":
-        from front_end_jerry import GuiInterface
-        this_canvas = GuiInterface.canvas
-
-    def __init__(self):
+class DrawerJack(AbstractDrawer):
+    def __init__(self, canvas):
+        self.this_canvas = canvas
         self.colour = ""
         self.test_string = ""
         self.src_x = 0
         self.src_y = 0
         self.des_x = 0
         self.des_y = 0
-        self.penIsDown = False
+        self.penIsDown = True
 
     def select_pen(self, pen_num):
         self.colour = my_enums.Pen.colours[pen_num]
@@ -55,7 +48,6 @@ class Drawer(AbstractDrawer):
             self.des_x = self.src_x - distance
             self.des_y = self.src_y
         if self.penIsDown:
-
             self.this_canvas.create_line(
                 self.src_x, self.src_y, self.des_x, self.des_y, fill=self.colour
             )

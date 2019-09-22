@@ -1,16 +1,16 @@
 # created by Kieran Jerry Jonathon
 from tigr import AbstractParser
 import re
-from drawer_kieran import Drawer
+from drawer_kieran import DrawerKieran
 import doctest
 
 
-class Parser(AbstractParser):
+class ParserJerry(AbstractParser):
     def parse(self, raw_source):
         """
-        >>> d = Drawer()
+        >>> d = DrawerKieran()
         >>> d.can_draw = True
-        >>> p = Parser(d)
+        >>> p = ParserJerry(d)
         >>> p.parse('X 100')
         GOTO X=100
         """
@@ -19,17 +19,11 @@ class Parser(AbstractParser):
         """
         self.source = raw_source
         if raw_source is not "":
-            command = re.findall(
-                r"P\s+\d+|X\s+\d+|D|G|N\s+\d+|E\s+\d+|S\s+\d+|W\s+\d+|Y\s+\d+|U",
-                self.source,
-                re.M,
-            )
-            for index in range(len(command)):
-                direction = "".join(re.findall(r"[A-Z]", command[index]))
+            for line in raw_source:
+                line = re.match(r"^\w*\s*\d*", line).group()
+                direction = "".join(re.findall(r"[A-Z]", line))
+                data = int("".join(re.findall(r"\d+", line)))  # TODO: Switch Statements
                 try:
-                    data = int(
-                        "".join(re.findall(r"\d+", command[index]))
-                    )  # TODO: Switch Statements
                     if direction == "P":
                         self.drawer.select_pen(data)
                     if direction == "G":

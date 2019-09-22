@@ -5,17 +5,41 @@ import tkinter
 from tkinter import filedialog
 from tkinter.ttk import Combobox
 
+from drawer_jack import DrawerJack
+from drawer_kieran import DrawerKieran
+from drawer_turtle_jack import DrawerTurtleJack
+from parser_dang import ParserDang
+from parser_jerry import ParserJerry
+from parser_jonathan_v2 import ParserJonathon
+from source_reader import SourceReader
+
 
 class TkinterInterface:
-    def __init__(self, source_reader):
-        self.toDraw = "N 100 # then north 1cm"
-        self.importedFile = "Input.txt"
+    def __init__(self):
         self.window = tkinter.Tk()
         self.windowCanvas = tkinter.Tk()
+        self.windowCanvas.title("TK")
         self.canvas = tkinter.Canvas(self.windowCanvas, width=500, height=500)
         self.config = open("config.txt", "r+").read().splitlines()
-        self.source_reader = source_reader
-        self.windowCanvas.title("TK")
+        drawer = None
+        if self.config[0] == "DrawerKieran":
+            drawer = DrawerKieran(self.canvas)
+        elif self.config[0] == "DrawerJack":
+            drawer = DrawerJack(self.canvas)
+        elif self.config[0] == "DrawerTurtleJack":
+            drawer = DrawerTurtleJack(self.canvas)
+
+        self.parser = None
+        if self.config[1] == "ParserDang":
+            self.parser = ParserDang(drawer)
+        elif self.config[1] == "ParserJerry":
+            self.parser = ParserJerry(drawer)
+        elif self.config[1] == "ParserJonathanV2":
+            self.parser = ParserJonathon(drawer)
+
+        self.source_reader = None
+        self.toDraw = "N 100 # then north 1cm"
+        self.importedFile = "Input.txt"
         self.canvas.pack()
         self.window.title("GUI")
         self.window.draw_btn = tkinter.Button(
@@ -87,7 +111,8 @@ class TkinterInterface:
         os.execl(python, python, *sys.argv)
 
     def draw(self):  # TODO: Inappropriate Intimacy
-        self.source_reader.parser.parse(self.toDraw)
+        self.source_reader = SourceReader(self.parser, self.importedFile)
+        self.source_reader.go()
         self.window.toDrawLabel.config(text=self.toDraw)
 
     def importfile(self):

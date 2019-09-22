@@ -5,18 +5,12 @@ import my_enums
 from tigr import AbstractDrawer
 
 
-class Drawer(AbstractDrawer):
+class DrawerKieran(AbstractDrawer):
     x_pos = 0
     y_pos = 0
-    config = open("config.txt", "r+").read().splitlines()  # TODO: Duplicate code
-    if config[2] == "FrontEndKieran":
-        from front_end_kieran import TkinterInterface
-        this_canvas = TkinterInterface.canvas
-    elif config[2] == "FrontEndJerry":
-        from front_end_jerry import GuiInterface
-        this_canvas = GuiInterface.canvas
 
-    def __init__(self):
+    def __init__(self, canvas):
+        self.this_canvas = canvas
         self.x_pos = 0
         self.y_pos = 0
         self.test_string = ""
@@ -45,9 +39,9 @@ class Drawer(AbstractDrawer):
 
     def draw_line(self, direction, distance):
         if self.can_draw:
+            print(f"drawing line of length {distance} at {direction} degrees")
             if direction == 0:
                 direction = 360
-
             direction = (math.pi * 2) / (360 / direction)
             new_x = distance * math.sin(direction)
             new_y = -distance * math.cos(direction)
@@ -60,4 +54,3 @@ class Drawer(AbstractDrawer):
             )
             self.x_pos += new_x
             self.y_pos += new_y
-            print(f"drawing line of length {distance} at {direction} degrees")

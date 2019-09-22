@@ -3,9 +3,9 @@ from tigr import AbstractParser, AbstractSourceReader
 import re
 
 
-class Parser(AbstractParser):
+class ParserDang(AbstractParser):
     def parse(self, raw_source):
-        self.source = raw_source.splitlines()
+        self.source = raw_source
 
         for command in self.source:  # TODO: Switch Statements
             command = self.remove_comment(command)

@@ -3,7 +3,7 @@ from tigr import AbstractParser
 import re
 
 
-class Parser(AbstractParser):
+class ParserJonathon(AbstractParser):
     def __init__(self, drawer):
         super().__init__(drawer)
         self.commandlist = {
@@ -20,7 +20,7 @@ class Parser(AbstractParser):
 
     def parse(self, raw_source):
         # Jonathan Holdaway worked on this
-        self.source = raw_source.splitlines()
+        self.source = raw_source
         for line in self.source:
             inputs = re.findall(r"\w+", line)
             self.data = re.findall(r"\d+", line)

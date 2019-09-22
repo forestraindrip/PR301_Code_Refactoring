@@ -5,15 +5,41 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter.ttk import Combobox
 
+from drawer_jack import DrawerJack
+from drawer_kieran import DrawerKieran
+from drawer_turtle_jack import DrawerTurtleJack
+from parser_dang import ParserDang
+from parser_jerry import ParserJerry
+from parser_jonathan_v2 import ParserJonathon
+from source_reader import SourceReader
+
 
 class GuiInterface:
-    def __init__(self, source_reader):
+    def __init__(self):
+        self.importedFile = None
+        self.master = tkinter.Tk()
+        self.config = open("config.txt", "r+").read().splitlines()
+        self.canvas = tkinter.Canvas(self.master, bg="white", width=500, height=500)
         self.canvas.pack(side="bottom", fill="x", expand="yes")
         self.init_widgets()
-        self.source_reader = source_reader
-        self.master = tkinter.Tk()
-        self.canvas = tkinter.Canvas(self.master, bg="white", width=500, height=500)
-        self.config = open("config.txt", "r+").read().splitlines()
+
+        drawer = None
+        if self.config[0] == "DrawerKieran":
+            drawer = DrawerKieran(self.canvas)
+        elif self.config[0] == "DrawerJack":
+            drawer = DrawerJack(self.canvas)
+        elif self.config[0] == "DrawerTurtleJack":
+            drawer = DrawerTurtleJack(self.canvas)
+
+        self.parser = None
+        if self.config[1] == "ParserDang":
+            self.parser = ParserDang(drawer)
+        elif self.config[1] == "ParserJerry":
+            self.parser = ParserJerry(drawer)
+        elif self.config[1] == "ParserJonathanV2":
+            self.parser = ParserJonathon(drawer)
+
+        self.source_reader = None
 
     def init_widgets(self):
         self.master.title("TkinterGUI")
@@ -78,7 +104,9 @@ class GuiInterface:
         self.master.text.pack(side="left", fill="both", expand="yes")
 
     def draw(self):  # TODO: Inappropriate Intimacy
-        self.source_reader.parser.parse(self.master.text.get(1.0, "end-1c"))
+        # self.source_reader.go(self.master.text.get(1.0, "end-1c"))
+        self.source_reader = SourceReader(self.parser, self.importedFile)
+        self.source_reader.go()
 
     def restart_program(self):  # TODO: Duplicate code
         """Restarts the current program.
@@ -107,6 +135,7 @@ class GuiInterface:
         )
         if self.importedFile is not "":
             self.insert_text(open(self.importedFile, "r+").read())
+
 
     def start(self):
         self.master.mainloop()
