@@ -5,6 +5,7 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter.ttk import Combobox
 
+from abstract_front_end import AbstractFrontEnd
 from drawer_jack import DrawerJack
 from drawer_kieran import DrawerKieran
 from drawer_turtle_jack import DrawerTurtleJack
@@ -14,8 +15,9 @@ from parser_jonathan_v2 import ParserJonathon
 from source_reader import SourceReader
 
 
-class GuiInterface:
+class GuiInterface(AbstractFrontEnd):
     def __init__(self):
+        super().__init__()
         self.importedFile = None
         self.master = tkinter.Tk()
         self.config = open("config.txt", "r+").read().splitlines()
@@ -103,24 +105,7 @@ class GuiInterface:
         self.master.text = Text(self.master, height=27, width=32)
         self.master.text.pack(side="left", fill="both", expand="yes")
 
-    def draw(self):  # TODO: Inappropriate Intimacy
-        self.source_reader = SourceReader(self.parser, self.importedFile)
-        self.source_reader.go()
-
-    def restart_program(self):  # TODO: Duplicate code
-        file = open("config.txt", "w")
-        file.write(
-            self.master.comboDrawer.get()
-            + "\n"
-            + self.master.comboParser.get()
-            + "\n"
-            + self.master.comboInterface.get()
-        )
-        file.close()
-        python = sys.executable
-        os.execl(python, python, *sys.argv)
-
-    def insert_text(self, row_source):
+    def _insert_text(self, row_source):
         self.master.text.insert("0.0", row_source)
 
     def to_import(self):
@@ -130,7 +115,4 @@ class GuiInterface:
             filetypes=(("txt files", "*.txt"), ("all files", "*.*")),
         )
         if self.importedFile is not "":
-            self.insert_text(open(self.importedFile, "r+").read())
-
-    def start(self):
-        self.master.mainloop()
+            self._insert_text(open(self.importedFile, "r+").read())
