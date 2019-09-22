@@ -18,31 +18,14 @@ from source_reader import SourceReader
 class TkinterInterface(AbstractFrontEnd):
     def __init__(self):
         super().__init__()
+        self.importedFile = "Input.txt"
         self.master = tkinter.Tk()
         self.windowCanvas = tkinter.Tk()
         self.windowCanvas.title("TK")
         self.canvas = tkinter.Canvas(self.windowCanvas, width=500, height=500)
-        self.config = open("config.txt", "r+").read().splitlines()
-        drawer = None
-        if self.config[0] == "DrawerKieran":
-            drawer = DrawerKieran(self.canvas)
-        elif self.config[0] == "DrawerJack":
-            drawer = DrawerJack(self.canvas)
-        elif self.config[0] == "DrawerTurtleJack":
-            drawer = DrawerTurtleJack(self.canvas)
-
-        self.parser = None
-        if self.config[1] == "ParserDang":
-            self.parser = ParserDang(drawer)
-        elif self.config[1] == "ParserJerry":
-            self.parser = ParserJerry(drawer)
-        elif self.config[1] == "ParserJonathanV2":
-            self.parser = ParserJonathon(drawer)
-
-        self.source_reader = None
         self.toDraw = "N 100 # then north 1cm"
-        self.importedFile = "Input.txt"
         self.canvas.pack()
+        self.init_widgets()
 
     def init_widgets(self):
         self.master.title("GUI")

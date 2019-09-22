@@ -15,29 +15,12 @@ from source_reader import SourceReader
 
 class AbstractFrontEnd:
     def __init__(self):
-        self.importedFile = None
-        self.master = tkinter.Tk()
+        self.master = None
         self.config = open("config.txt", "r+").read().splitlines()
-        self.canvas = tkinter.Canvas(self.master, bg="white", width=500, height=500)
-        self.canvas.pack(side="bottom", fill="x", expand="yes")
-        self.init_widgets()
-
-        drawer = None
-        if self.config[0] == "DrawerKieran":
-            drawer = DrawerKieran(self.canvas)
-        elif self.config[0] == "DrawerJack":
-            drawer = DrawerJack(self.canvas)
-        elif self.config[0] == "DrawerTurtleJack":
-            drawer = DrawerTurtleJack(self.canvas)
-
+        self.canvas = None
+        self.importedFile = None
+        self.drawer = None
         self.parser = None
-        if self.config[1] == "ParserDang":
-            self.parser = ParserDang(drawer)
-        elif self.config[1] == "ParserJerry":
-            self.parser = ParserJerry(drawer)
-        elif self.config[1] == "ParserJonathanV2":
-            self.parser = ParserJonathon(drawer)
-
         self.source_reader = None
 
     def start(self):
@@ -47,6 +30,8 @@ class AbstractFrontEnd:
         pass
 
     def draw(self):
+        self.drawer = self.construct_drawer()
+        self.parser = self.construct_parser(self.drawer)
         self.source_reader = SourceReader(self.parser, self.importedFile)
         self.source_reader.go()
 
@@ -65,3 +50,23 @@ class AbstractFrontEnd:
 
     def importfile(self):
         pass
+
+    def construct_drawer(self):
+        drawer = None
+        if self.config[0] == "DrawerKieran":
+            drawer = DrawerKieran(self.canvas)
+        elif self.config[0] == "DrawerJack":
+            drawer = DrawerJack(self.canvas)
+        elif self.config[0] == "DrawerTurtleJack":
+            drawer = DrawerTurtleJack(self.canvas)
+        return drawer
+
+    def construct_parser(self, drawer):
+        parser = None
+        if self.config[1] == "ParserDang":
+            parser = ParserDang(drawer)
+        elif self.config[1] == "ParserJerry":
+            parser = ParserJerry(drawer)
+        elif self.config[1] == "ParserJonathanV2":
+            parser = ParserJonathon(drawer)
+        return parser

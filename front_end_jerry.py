@@ -18,30 +18,10 @@ from source_reader import SourceReader
 class GuiInterface(AbstractFrontEnd):
     def __init__(self):
         super().__init__()
-        self.importedFile = None
         self.master = tkinter.Tk()
-        self.config = open("config.txt", "r+").read().splitlines()
         self.canvas = tkinter.Canvas(self.master, bg="white", width=500, height=500)
         self.canvas.pack(side="bottom", fill="x", expand="yes")
         self.init_widgets()
-
-        drawer = None
-        if self.config[0] == "DrawerKieran":
-            drawer = DrawerKieran(self.canvas)
-        elif self.config[0] == "DrawerJack":
-            drawer = DrawerJack(self.canvas)
-        elif self.config[0] == "DrawerTurtleJack":
-            drawer = DrawerTurtleJack(self.canvas)
-
-        self.parser = None
-        if self.config[1] == "ParserDang":
-            self.parser = ParserDang(drawer)
-        elif self.config[1] == "ParserJerry":
-            self.parser = ParserJerry(drawer)
-        elif self.config[1] == "ParserJonathanV2":
-            self.parser = ParserJonathon(drawer)
-
-        self.source_reader = None
 
     def init_widgets(self):
         self.master.title("TkinterGUI")
@@ -59,7 +39,7 @@ class GuiInterface(AbstractFrontEnd):
         self.master.draw_btn = Button(self.master, text="Draw", command=self.draw)
         self.master.draw_btn.pack(side="left", fill="both", expand="yes")
         self.master.import_btn = Button(
-            self.master, text="import", command=self.to_import
+            self.master, text="import", command=self.importfile
         )
         self.master.import_btn.pack(side="left", fill="both", expand="yes")
 
@@ -108,7 +88,7 @@ class GuiInterface(AbstractFrontEnd):
     def _insert_text(self, row_source):
         self.master.text.insert("0.0", row_source)
 
-    def to_import(self):
+    def importfile(self):
         self.importedFile = filedialog.askopenfilename(
             initialdir=os.getcwd(),
             title="Select file",
