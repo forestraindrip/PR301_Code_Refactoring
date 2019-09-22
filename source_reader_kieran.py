@@ -2,7 +2,7 @@
 from tigr import AbstractSourceReader
 
 
-class MainTIGr(AbstractSourceReader):  # TODO:
+class MainTIGr:  # TODO:
     def go(self):
         global interface  # TODO: Global
         if config[2] == "FrontEndKieran":
@@ -33,5 +33,5 @@ if __name__ == "__main__":
     elif config[1] == "ParserJonathanV2":
         from parser_jonathan_v2 import Parser
 
-    main = MainTIGr(Parser(Drawer()))
+    main = MainTIGr()
     main.go()

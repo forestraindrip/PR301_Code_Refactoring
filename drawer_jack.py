@@ -45,28 +45,20 @@ class Drawer(AbstractDrawer):
         if direction == 0:
             self.des_y = self.src_y - distance
             self.des_x = self.src_x
-            # print("going UP " + str(distance))
         if direction == 180:
             self.des_y = self.src_y + distance
             self.des_x = self.src_x
-            # print("going DOWN " + str(distance))
         if direction == 90:
             self.des_x = self.src_x + distance
             self.des_y = self.src_y
-            # print("going RIGHT " + str(distance))
         if direction == 270:
             self.des_x = self.src_x - distance
             self.des_y = self.src_y
-            # print("going LEFT  " + str(distance))
-
         if self.penIsDown:
-            # print("src_x == " + str(self.src_x) + "/ src_y == " + str(self.src_y) + "des_x == " + str(
-            # self.des_x) + "/ des_y == " + str(self.des_y))
+
             self.this_canvas.create_line(
                 self.src_x, self.src_y, self.des_x, self.des_y, fill=self.colour
             )
-            # self.test_string += f'drawing line of length {distance} at {direction} degrees'
 
         self.src_x, self.src_y = self.des_x, self.des_y
-        # print("source_x == " + str(self.src_x) + "source_y == " + str(self.src_y))
         print(f"drawing line of length {distance} at {direction} degrees")

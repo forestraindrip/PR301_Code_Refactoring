@@ -7,15 +7,14 @@ from tkinter.ttk import Combobox
 
 
 class TkinterInterface:
-    toDraw = "N 100 # then north 1cm"
-    importedFile = "Input.txt"
-    window = tkinter.Tk()
-    windowCanvas = tkinter.Tk()
-    canvas = tkinter.Canvas(windowCanvas, width=500, height=500)
-    config = open("config.txt", "r+").read().splitlines()
-
     def __init__(self, source_reader):
-        self.SourceReader = source_reader
+        self.toDraw = "N 100 # then north 1cm"
+        self.importedFile = "Input.txt"
+        self.window = tkinter.Tk()
+        self.windowCanvas = tkinter.Tk()
+        self.canvas = tkinter.Canvas(self.windowCanvas, width=500, height=500)
+        self.config = open("config.txt", "r+").read().splitlines()
+        self.source_reader = source_reader
         self.windowCanvas.title("TK")
         self.canvas.pack()
         self.window.title("GUI")
@@ -87,8 +86,8 @@ class TkinterInterface:
         python = sys.executable
         os.execl(python, python, *sys.argv)
 
-    def draw(self):         # TODO: Inappropriate Intimacy
-        self.SourceReader.parser.parse(self.toDraw)
+    def draw(self):  # TODO: Inappropriate Intimacy
+        self.source_reader.parser.parse(self.toDraw)
         self.window.toDrawLabel.config(text=self.toDraw)
 
     def importfile(self):

@@ -47,8 +47,7 @@ class Drawer(AbstractDrawer):
         if self.can_draw:
             if direction == 0:
                 direction = 360
-            # test a direction angle direction = 30 Angle direction needs to be converted a decimal and divided into
-            # pie. This is required math.sin and math.cos
+
             direction = (math.pi * 2) / (360 / direction)
             new_x = distance * math.sin(direction)
             new_y = -distance * math.cos(direction)

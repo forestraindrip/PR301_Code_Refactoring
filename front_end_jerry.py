@@ -7,14 +7,13 @@ from tkinter.ttk import Combobox
 
 
 class GuiInterface:
-    master = tkinter.Tk()
-    canvas = tkinter.Canvas(master, bg="white", width=500, height=500)
-    config = open("config.txt", "r+").read().splitlines()
-
     def __init__(self, source_reader):
         self.canvas.pack(side="bottom", fill="x", expand="yes")
         self.init_widgets()
         self.source_reader = source_reader
+        self.master = tkinter.Tk()
+        self.canvas = tkinter.Canvas(self.master, bg="white", width=500, height=500)
+        self.config = open("config.txt", "r+").read().splitlines()
 
     def init_widgets(self):
         self.master.title("TkinterGUI")

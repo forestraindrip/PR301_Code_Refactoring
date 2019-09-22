@@ -8,17 +8,16 @@ class Drawer(AbstractDrawer):
     config = open("config.txt", "r+").read().splitlines()  # TODO: Duplicate code
     if config[2] == "FrontEndKieran":
         from front_end_kieran import TkinterInterface
-        this_canvas = TkinterInterface.canvas
+        this_canvas = TkinterInterface().canvas
     elif config[2] == "FrontEndJerry":
         from front_end_jerry import GuiInterface
-        this_canvas = GuiInterface.canvas
+        this_canvas = GuiInterface().canvas
 
-    def __init__(self,):
+    def __init__(self, ):
         self.test_string = ""
         self.cursor = turtle.RawPen(self.this_canvas)
         self.cursor.speed(1)
 
-    # pen_num should be int
     def select_pen(self, pen_num):
         self.cursor.color(my_enums.Pen.colours[pen_num])
         print(f"Selected pen {pen_num}")
@@ -30,8 +29,6 @@ class Drawer(AbstractDrawer):
     def pen_up(self):
         self.cursor.penup()
         print("pen up")
-
-        # along should be int
 
     def go_along(self, along):
         self.pen_up()
