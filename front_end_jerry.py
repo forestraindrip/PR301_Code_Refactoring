@@ -32,7 +32,6 @@ class GuiInterface(AbstractFrontEnd):
 
         self.__create_draw_button()
         self.__setup_label("selectDrawer", "Select Drawer")
-
         self.__create_drawer_selection_input()
 
         self.__setup_label("selectParser", "Select Parser")
