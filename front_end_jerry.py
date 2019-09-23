@@ -6,13 +6,6 @@ from tkinter import filedialog
 from tkinter.ttk import Combobox
 
 from abstract_front_end import AbstractFrontEnd
-from drawer_jack import DrawerJack
-from drawer_kieran import DrawerKieran
-from drawer_turtle_jack import DrawerTurtleJack
-from parser_dang import ParserDang
-from parser_jerry import ParserJerry
-from parser_jonathan_v2 import ParserJonathon
-from source_reader import SourceReader
 
 
 class GuiInterface(AbstractFrontEnd):
