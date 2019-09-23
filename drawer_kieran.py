@@ -6,8 +6,6 @@ from tigr import AbstractDrawer
 
 
 class DrawerKieran(AbstractDrawer):
-    x_pos = 0
-    y_pos = 0
 
     def __init__(self, canvas):
         super().__init__(canvas)
@@ -15,7 +13,7 @@ class DrawerKieran(AbstractDrawer):
         self.y_pos = 0
         self.test_string = ""
         self.colour = ""
-        self.can_draw = True
+        self.can_draw = False
 
     def select_pen(self, pen_num):
         self.colour = my_enums.Pen.colours[pen_num]

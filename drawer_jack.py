@@ -12,7 +12,7 @@ class DrawerJack(AbstractDrawer):
         self.src_y = 0
         self.des_x = 0
         self.des_y = 0
-        self.penIsDown = True
+        self.penIsDown = False
 
     def select_pen(self, pen_num):
         self.colour = my_enums.Pen.colours[pen_num]

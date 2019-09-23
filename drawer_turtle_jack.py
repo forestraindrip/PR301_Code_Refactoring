@@ -36,6 +36,7 @@ class DrawerTurtleJack(AbstractDrawer):
         print(f"GOTO X={down}")
 
     def draw_line(self, direction, distance):
-        self.cursor.setheading(direction + 90)
-        self.cursor.forward(distance)
-        print(f"drawing line of length {distance} at {direction} degrees")
+        if self.penIsDown:
+            self.cursor.setheading(direction + 90)
+            self.cursor.forward(distance)
+            print(f"drawing line of length {distance} at {direction} degrees")
