@@ -10,7 +10,7 @@ class DrawerTurtleJack(AbstractDrawer):
         super().__init__(canvas)
         self.test_string = ""
         self.cursor = turtle.RawPen(self._canvas)
-        self.penIsDown = True
+        self.penIsDown = False
         self.cursor.speed(1)
 
     def select_pen(self, pen_num):
@@ -33,7 +33,7 @@ class DrawerTurtleJack(AbstractDrawer):
     def go_down(self, down):
         self.pen_up()
         self.cursor.sety(down - 250)
-        print(f"GOTO X={down}")
+        print(f"GOTO Y={down}")
 
     def draw_line(self, direction, distance):
         if self.penIsDown:

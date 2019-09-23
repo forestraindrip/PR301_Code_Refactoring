@@ -31,26 +31,27 @@ class GuiInterface(AbstractFrontEnd):
         self.master.geometry(center)
 
         self.__create_draw_button()
-        self.__setup_drawer_selection_label()
+        self.__setup_label("selectDrawer", "Select Drawer")
+
         self.__create_drawer_selection_input()
 
-        self.__setup_parser_selection_label()
+        self.__setup_label("selectParser", "Select Parser")
         self.__create_parser_selection_input()
 
-        self.__setup_frontend_selection_label()
+        self.__setup_label("selectInterface", "Select Interface")
         self.__create_frontend_selection_input()
 
         self.__create_close_button()
 
-        self.__create_instruction_label()
+        self.__setup_label("instruction", "Please enter command:")
         self.__create_instruction_input()
 
     def __setup_title(self, title):
         self.master.title(title)
 
-    def __setup_drawer_selection_label(self):
-        self.master.selectDrawer = tkinter.Label(self.master, text="Select Drawer")
-        self.master.selectDrawer.pack(side="left", fill="both", expand="yes")
+    def __setup_label(self, target, text):
+        self.master.target = tkinter.Label(self.master, text=text)
+        self.master.target.pack(side="left", fill="both", expand="yes")
 
     def __create_drawer_selection_input(self):
         self.master.comboDrawer = Combobox(
@@ -59,22 +60,12 @@ class GuiInterface(AbstractFrontEnd):
         self.master.comboDrawer.set(self.config[0])
         self.master.comboDrawer.pack(side="left", fill="both", expand="yes")
 
-    def __setup_frontend_selection_label(self):
-        self.master.selectInterface = tkinter.Label(
-            self.master, text="Select Interface"
-        )
-        self.master.selectInterface.pack(side="left", fill="both", expand="yes")
-
     def __create_frontend_selection_input(self):
         self.master.comboInterface = Combobox(
             self.master, values=["FrontEndJerry", "FrontEndKieran"]
         )
         self.master.comboInterface.set(self.config[2])
         self.master.comboInterface.pack(side="left", fill="both", expand="yes")
-
-    def __setup_parser_selection_label(self):
-        self.master.selectParser = tkinter.Label(self.master, text="Select Parser")
-        self.master.selectParser.pack(side="left", fill="both", expand="yes")
 
     def __create_parser_selection_input(self):
         self.master.comboParser = Combobox(
@@ -90,12 +81,6 @@ class GuiInterface(AbstractFrontEnd):
             self.master, text="import", command=self.importfile
         )
         self.master.import_btn.pack(side="left", fill="both", expand="yes")
-
-    def __create_instruction_label(self):
-        self.master.instruction = Label(
-            self.master, text="Please enter command:", font=("serif", 18)
-        )
-        self.master.instruction.pack(side="left", fill="both", expand="yes")
 
     def __create_instruction_input(self):
         self.master.text = Text(self.master, height=27, width=32)

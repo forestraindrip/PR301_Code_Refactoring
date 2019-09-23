@@ -33,7 +33,7 @@ class DrawerKieran(AbstractDrawer):
 
     def go_down(self, down):
         self.y_pos = down
-        print(f"GOTO X={down}")
+        print(f"GOTO Y={down}")
 
     def draw_line(self, direction, distance):
         if self.can_draw:

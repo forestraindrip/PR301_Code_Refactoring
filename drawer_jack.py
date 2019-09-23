@@ -32,9 +32,9 @@ class DrawerJack(AbstractDrawer):
 
     def go_down(self, down):
         self.src_y = down
-        print(f"GOTO X={down}")
+        print(f"GOTO Y={down}")
 
-    def draw_line(self, direction, distance):  # TODO: Switch statement
+    def draw_line(self, direction, distance):
         if direction == 0:
             self.des_y = self.src_y - distance
             self.des_x = self.src_x

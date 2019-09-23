@@ -22,29 +22,27 @@ class ParserJerry(AbstractParser):
             for line in raw_source:
                 line = re.match(r"^\w*\s*\d*", line).group()
                 direction = "".join(re.findall(r"[A-Z]", line))
-                data = int("".join(re.findall(r"\d+", line)))  # TODO: Switch Statements
-                try:
-                    if direction == "P":
-                        self.drawer.select_pen(data)
-                    if direction == "G":
-                        self.drawer.goto(data)
-                    if direction == "N":
-                        self.drawer.draw_line(0, data)
-                    if direction == "E":
-                        self.drawer.draw_line(90, data)
-                    if direction == "S":
-                        self.drawer.draw_line(180, data)
-                    if direction == "W":
-                        self.drawer.draw_line(270, data)
-                    if direction == "X":
-                        self.drawer.go_along(data)
-                    if direction == "Y":
-                        self.drawer.go_down(data)
-                except ValueError:
-                    if direction == "D":
-                        self.drawer.pen_down()
-                    if direction == "U":
-                        self.drawer.pen_up()
+                data = int("".join(re.findall(r"\d+", line)))
+                if direction == "P":
+                    self.drawer.select_pen(data)
+                if direction == "G":
+                    self.drawer.goto(data)
+                if direction == "N":
+                    self.drawer.draw_line(0, data)
+                if direction == "E":
+                    self.drawer.draw_line(90, data)
+                if direction == "S":
+                    self.drawer.draw_line(180, data)
+                if direction == "W":
+                    self.drawer.draw_line(270, data)
+                if direction == "X":
+                    self.drawer.go_along(data)
+                if direction == "Y":
+                    self.drawer.go_down(data)
+                if direction == "D":
+                    self.drawer.pen_down()
+                if direction == "U":
+                    self.drawer.pen_up()
 
 
 if __name__ == "__main__":

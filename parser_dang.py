@@ -7,7 +7,7 @@ class ParserDang(AbstractParser):
     def parse(self, raw_source):
         self.source = raw_source
 
-        for command in self.source:  # TODO: Switch Statements
+        for command in self.source:
             command = self.__remove_comment(command)
             if re.search("^P|p", command):
                 self.drawer.select_pen(int(re.search("[1-4]", command).group(0)))
