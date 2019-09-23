@@ -16,71 +16,6 @@ class GuiInterface(AbstractFrontEnd):
         self.canvas.pack(side="bottom", fill="x", expand="yes")
         self.init_widgets()
 
-    def init_widgets(self):
-        self.master.title("TkinterGUI")
-        width = 1200
-        height = 600
-        screenwidth = self.master.winfo_screenwidth()
-        screenheight = self.master.winfo_screenheight()
-        center = "%dx%d+%d+%d" % (
-            width,
-            height,
-            (screenwidth - 800) / 2,
-            (screenheight - height) / 2,
-        )
-        self.master.geometry(center)
-        self.master.draw_btn = Button(self.master, text="Draw", command=self.draw)
-        self.master.draw_btn.pack(side="left", fill="both", expand="yes")
-        self.master.import_btn = Button(
-            self.master, text="import", command=self.importfile
-        )
-        self.master.import_btn.pack(side="left", fill="both", expand="yes")
-
-        self.master.selectDrawer = tkinter.Label(self.master, text="Select Drawer")
-        self.master.selectDrawer.pack(side="left", fill="both", expand="yes")
-
-        self.master.comboDrawer = Combobox(
-            self.master, values=["DrawerJack", "DrawerKieran", "DrawerTurtleJack"]
-        )
-        self.master.comboDrawer.set(self.config[0])
-        self.master.comboDrawer.pack(side="left", fill="both", expand="yes")
-
-        self.master.selectParser = tkinter.Label(self.master, text="Select Parser")
-        self.master.selectParser.pack(side="left", fill="both", expand="yes")
-
-        self.master.comboParser = Combobox(
-            self.master, values=["ParserDang", "ParserJerry", "ParserJonathanV2"]
-        )
-        self.master.comboParser.set(self.config[1])
-        self.master.comboParser.pack(side="left", fill="both", expand="yes")
-
-        self.master.selectInterface = tkinter.Label(
-            self.master, text="Select Interface"
-        )
-        self.master.selectInterface.pack(side="left", fill="both", expand="yes")
-
-        self.master.comboInterface = Combobox(
-            self.master, values=["FrontEndJerry", "FrontEndKieran"]
-        )
-        self.master.comboInterface.set(self.config[2])
-        self.master.comboInterface.pack(side="left", fill="both", expand="yes")
-
-        self.master.close_btn = Button(
-            self.master, text="Restart", command=self.restart_program
-        )
-        self.master.close_btn.pack(side="left", fill="both", expand="yes")
-
-        self.master.instruction = Label(
-            self.master, text="Please enter command:", font=("serif", 18)
-        )
-        self.master.instruction.pack(side="left", fill="both", expand="yes")
-
-        self.master.text = Text(self.master, height=27, width=32)
-        self.master.text.pack(side="left", fill="both", expand="yes")
-
-    def _insert_text(self, row_source):
-        self.master.text.insert("0.0", row_source)
-
     def importfile(self):
         self.importedFile = filedialog.askopenfilename(
             initialdir=os.getcwd(),
@@ -89,3 +24,99 @@ class GuiInterface(AbstractFrontEnd):
         )
         if self.importedFile is not "":
             self._insert_text(open(self.importedFile, "r+").read())
+
+    def init_widgets(self):
+        self.__setup_title("TkinterGUI")
+        center = self.__get_center_point(1200, 600)
+        self.master.geometry(center)
+
+        self.__create_draw_button()
+        self.__setup_drawer_selection_label()
+        self.__create_drawer_selection_input()
+
+        self.__setup_parser_selection_label()
+        self.__create_parser_selection_input()
+
+        self.__setup_frontend_selection_label()
+        self.__create_frontend_selection_input()
+
+        self.__create_close_button()
+
+        self.__create_instruction_label()
+        self.__create_instruction_input()
+
+    def __setup_title(self, title):
+        self.master.title(title)
+
+    def __setup_drawer_selection_label(self):
+        self.master.selectDrawer = tkinter.Label(self.master, text="Select Drawer")
+        self.master.selectDrawer.pack(side="left", fill="both", expand="yes")
+
+    def __create_drawer_selection_input(self):
+        self.master.comboDrawer = Combobox(
+            self.master, values=["DrawerJack", "DrawerKieran", "DrawerTurtleJack"]
+        )
+        self.master.comboDrawer.set(self.config[0])
+        self.master.comboDrawer.pack(side="left", fill="both", expand="yes")
+
+    def __setup_frontend_selection_label(self):
+        self.master.selectInterface = tkinter.Label(
+            self.master, text="Select Interface"
+        )
+        self.master.selectInterface.pack(side="left", fill="both", expand="yes")
+
+    def __create_frontend_selection_input(self):
+        self.master.comboInterface = Combobox(
+            self.master, values=["FrontEndJerry", "FrontEndKieran"]
+        )
+        self.master.comboInterface.set(self.config[2])
+        self.master.comboInterface.pack(side="left", fill="both", expand="yes")
+
+    def __setup_parser_selection_label(self):
+        self.master.selectParser = tkinter.Label(self.master, text="Select Parser")
+        self.master.selectParser.pack(side="left", fill="both", expand="yes")
+
+    def __create_parser_selection_input(self):
+        self.master.comboParser = Combobox(
+            self.master, values=["ParserDang", "ParserJerry", "ParserJonathanV2"]
+        )
+        self.master.comboParser.set(self.config[1])
+        self.master.comboParser.pack(side="left", fill="both", expand="yes")
+
+    def __create_draw_button(self):
+        self.master.draw_btn = Button(self.master, text="Draw", command=self.draw)
+        self.master.draw_btn.pack(side="left", fill="both", expand="yes")
+        self.master.import_btn = Button(
+            self.master, text="import", command=self.importfile
+        )
+        self.master.import_btn.pack(side="left", fill="both", expand="yes")
+
+    def __create_instruction_label(self):
+        self.master.instruction = Label(
+            self.master, text="Please enter command:", font=("serif", 18)
+        )
+        self.master.instruction.pack(side="left", fill="both", expand="yes")
+
+    def __create_instruction_input(self):
+        self.master.text = Text(self.master, height=27, width=32)
+        self.master.text.pack(side="left", fill="both", expand="yes")
+
+    def __create_close_button(self):
+        self.master.close_btn = Button(
+            self.master, text="Restart", command=self.restart_program
+        )
+        self.master.close_btn.pack(side="left", fill="both", expand="yes")
+
+    def __get_center_point(self, width, height):
+        screenwidth = self.master.winfo_screenwidth()
+        screenheight = self.master.winfo_screenheight()
+        center = "%dx%d+%d+%d" % (
+            width,
+            height,
+            (screenwidth - 800) / 2,
+            (screenheight - height) / 2,
+        )
+        return center
+
+    def _insert_text(self, row_source):
+        self.master.text.insert("0.0", row_source)
