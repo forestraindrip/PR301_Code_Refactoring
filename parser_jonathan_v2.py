@@ -19,7 +19,6 @@ class ParserJonathon(AbstractParser):
         }
 
     def parse(self, raw_source):
-        # Jonathan Holdaway worked on this
         self.source = raw_source
         for line in self.source:
             inputs = re.findall(r"\w+", line)

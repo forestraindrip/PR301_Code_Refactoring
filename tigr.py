@@ -7,6 +7,8 @@ Keep the interfaces defined below in your work.
 
 class AbstractDrawer(ABC):
     """ Responsible for defining an interface for drawing """
+    def __init__(self, canvas):
+        self._canvas = canvas
 
     @abstractmethod
     def select_pen(self, pen_num):

@@ -3,7 +3,7 @@
 - Lazy Class in AbstractSourceReader
 - Inappropriate Intimacy between front-ends and parsers
 - Shotgun Surgery in the drawers and front-ends
-- Alternative Classes with Different Interfaces in two Frontend
+- Alternative Classes with Different Interfaces in two Frontends
 - Switch statement in the drawers and the parsers
 - Refused-bequest in MainTIGr
 
@@ -18,13 +18,13 @@
         - AbstractSourceReader line 48~62
 
 ### Reasons
-After examination, the current system has no proper implementation of AbstractSourceReader for file reading which is required for Assignment1. The only implementation AbstractSourceReader is MainTIGr class and it is used as the entry point of the system; the MainTIGr twists the role of AbstractSourceReader and makes AbstractSourceReader more like a Lazy Class. In addition, the current system distributes the function of reading file into multiples front end interface which create other bad smells including inappropriate intimacy, shotgun surgery and refused-bequest. Therefore, I think the Lazy Class of AbstractSourceReader is the most critical bad smell at this stage.
+The system has no proper implementation of AbstractSourceReader for file reading which is required for Assignment1. The only implementation AbstractSourceReader is MainTIGr class and it is used as the entry point of the system; the MainTIGr twists the role of AbstractSourceReader and makes AbstractSourceReader a Lazy Class. In addition, the current system distributes the function of reading file into multiples frontend interfaces which create other bad smells including inappropriate intimacy, shotgun surgery and refused-bequest. Therefore, I think the Lazy Class of AbstractSourceReader is the most critical bad smell at this stage.
 ### Strategies/ approaches
 - Break the relationship between MainTIGr and AbstractSourceReader.
 - Implement a proper SourceReader for source reading.
-- Rename the drawers: Three drawers with different implementation sharing the same name.
-- Rename the parsers: Three parser with different implementation sharing the same name.
-- Redirect the functions need source reading to the new SourceReader.
+- Rename the drawers. Three drawers with different implementation sharing the same name before refactoring.
+- Rename the parsers. Three parser with different implementation sharing the same name before refactoring.
+- Redirect the functions needing source reading to the new SourceReader.
 ### Result Evaluation
 #### Has the bad smell been removed?
 Yes
