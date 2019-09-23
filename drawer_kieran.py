@@ -10,7 +10,7 @@ class DrawerKieran(AbstractDrawer):
     y_pos = 0
 
     def __init__(self, canvas):
-        self.this_canvas = canvas
+        super().__init__(canvas)
         self.x_pos = 0
         self.y_pos = 0
         self.test_string = ""
@@ -45,7 +45,7 @@ class DrawerKieran(AbstractDrawer):
             direction = (math.pi * 2) / (360 / direction)
             new_x = distance * math.sin(direction)
             new_y = -distance * math.cos(direction)
-            self.this_canvas.create_line(
+            self._canvas.create_line(
                 self.x_pos,
                 self.y_pos,
                 self.x_pos + new_x,

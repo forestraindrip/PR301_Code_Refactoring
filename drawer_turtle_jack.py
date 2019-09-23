@@ -7,9 +7,9 @@ from tigr import AbstractDrawer
 class DrawerTurtleJack(AbstractDrawer):
 
     def __init__(self, canvas):
+        super().__init__(canvas)
         self.test_string = ""
-        self.this_canvas = canvas
-        self.cursor = turtle.RawPen(self.this_canvas)
+        self.cursor = turtle.RawPen(self._canvas)
         self.penIsDown = True
         self.cursor.speed(1)
 

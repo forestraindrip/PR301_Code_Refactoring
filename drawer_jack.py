@@ -5,7 +5,7 @@ from tigr import AbstractDrawer
 
 class DrawerJack(AbstractDrawer):
     def __init__(self, canvas):
-        self.this_canvas = canvas
+        super().__init__(canvas)
         self.colour = ""
         self.test_string = ""
         self.src_x = 0
@@ -48,7 +48,7 @@ class DrawerJack(AbstractDrawer):
             self.des_x = self.src_x - distance
             self.des_y = self.src_y
         if self.penIsDown:
-            self.this_canvas.create_line(
+            self._canvas.create_line(
                 self.src_x, self.src_y, self.des_x, self.des_y, fill=self.colour
             )
 
