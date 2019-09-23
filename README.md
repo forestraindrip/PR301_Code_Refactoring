@@ -1,7 +1,8 @@
 # PR301_Code_Refactoring
-Process Document [Click](Documents/Bad_Smell_Document_YuHong.Jhuo_99140202.docx)
+Sel-marking Sheet [Click](Documents/BCPR301%20Assignment2%20self-marking%20sheet_YuHong.Jhuo_99140202.docx)
 
 Interface Diagram [Click](Documents/Interface_Diagram.jpg)
+
 ## Worst bad smells before refactoring
 -	Lazy Class in AbstractSourceReader.
 -	Inappropriate Intimacy between frontends and parsers.
