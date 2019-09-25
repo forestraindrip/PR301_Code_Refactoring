@@ -1,5 +1,5 @@
 # PR301_Code_Refactoring
- [Full Self-marking Sheet](Documents/BCPR301%20Assignment2%20self-marking%20sheet_YuHong.Jhuo_99140202.docx)
+ [Full Self-marking Sheet](Documents/BCPR301_Assignment2_self-marking%20sheet_YuHong.Jhuo_99140202.docx)
 
  [Interface Diagram](Documents/Interface_Diagram.jpg)
 ## Interface Diagram
